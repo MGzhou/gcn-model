@@ -74,21 +74,24 @@ $$  H^{(l+1)} = \sigma(\hat{D}^{-1/2}\hat{A}\hat{D}^{-1/2}H^{(l)}W^{(l)})  $$
 
 -  $\hat{A}=A+I，I$ 是单位矩阵；
 - $\hat{D}$ 是 $\hat{A}$ 的度矩阵（degree matrix），公式为 $\hat{D_{ii}}=\sum_j{\hat{A}_{ii}}$；
-- H是隐藏层的特征，对于输入层的话，$H^{(0)}=X$；
+- H是隐藏层的特征，对于输入层的话， $ H^{(0)}=X $；
 - σ是非线性激活函数，模型中使用ReLU激活函数；
 - W是训练权重矩阵。
 
-在实际使用中，公式中的$\hat{D}^{-1/2}\hat{A}\hat{D}^{-1/2}$ 是可以事先计算好，节省计算时间。
+在实际使用中，公式中的 $ \hat{D}^{-1/2}\hat{A}\hat{D}^{-1/2} $ 是可以事先计算好，节省计算时间。
 
 GCN运算维度变化分析，假设节点数量为N，特征维度是D，卷积输出维度是O，
 
 公式中变量的向量维度如下：
 
-$H=X\in{R^{N*D}}, A=\hat{A}=\hat{D}\in{R^{N*N}}，W\in{R^{D*O}}$
+
+$$ H=X\in{R^{N*D}}, A=\hat{A}=\hat{D}\in{R^{N*N}}，W\in{R^{D*O}} $$
+
 
 根据链式法则，一层GCN运算维度变化为：
 
-$$(N*\bcancel{N})*(\bcancel{N}*\bcancel{N})*(\bcancel{N}*\bcancel{N})*(\bcancel{N}*\bcancel{D})*(\bcancel{D}*O)=(N*O)$$
+$$ (N*\bcancel{N})*(\bcancel{N}*\bcancel{N})*(\bcancel{N}*\bcancel{N})*(\bcancel{N}*\bcancel{D})*(\bcancel{D}*O)=(N*O) $$
+
 
 > 从公式可以发现，这是将图结构运算转为MLP矩阵运算了。 
 >
