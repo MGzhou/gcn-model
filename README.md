@@ -10,6 +10,7 @@ GCN是2016年发表的模型，论文名称是《Semi-Supervised Classification 
 
 ```
 Python			3.10
+
 torch			2.1.2
 numpy			1.26.3
 scipy			1.12.0
