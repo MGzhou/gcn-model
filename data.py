@@ -31,8 +31,8 @@ class CoraData(object):
                  ['x', 'tx', 'allx', 'y', 'ty', 'ally', 'graph', 'test.index']]
 
     def __init__(self, data_root="./data/cora", rebuild=False):
-        """Cora数据，包括数据下载，处理，加载等功能
-        当数据的缓存文件存在时，将使用缓存文件，否则将下载、进行处理，并缓存到磁盘
+        """Cora数据，包括数据处理，加载等功能
+        当数据的缓存文件存在时，将使用缓存文件，否则将进行处理，并将处理中间结果缓存
 
         处理之后的数据可以通过属性 .data 获得，它将返回一个数据对象，包括如下几部分：
             * x: 节点的特征，维度为 2708 * 1433，类型为 np.ndarray
@@ -152,19 +152,6 @@ class CoraData(object):
             out = pickle.load(open(path, "rb"), encoding="latin1")
             out = out.toarray() if hasattr(out, "toarray") else out
             return out
-
-    @staticmethod
-    def download_data(url, save_path):
-        """数据下载工具，当原始数据不存在时将会进行下载"""
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-        data = urllib.request.urlopen(url)
-        filename = os.path.split(url)[-1]
-
-        with open(os.path.join(save_path, filename), 'wb') as f:
-            f.write(data.read())
-
-        return True
 
     @staticmethod
     def normalization(adjacency):

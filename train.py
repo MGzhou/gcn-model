@@ -128,7 +128,7 @@ if __name__=="__main__":
         "weight_decay":5e-4,    # 权重衰减
         "epochs":200,           # 训练轮次
         "device": DEVICE,       # 训练设备
-        "data_path": "/data/zmp/progect/task4_keytech/test/gcn-model/data/cora"  # 数据集路径
+        "data_path": "./data/cora"  # 数据集路径
     }
 
     main(config=config, is_draw_loss=True)

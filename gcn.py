@@ -32,7 +32,6 @@ class GraphConvolution(nn.Module):
         """
         super(GraphConvolution, self).__init__()
         
-        
         self.input_dim = input_dim
         self.output_dim = output_dim
         self.use_bias = use_bias
