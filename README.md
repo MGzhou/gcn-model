@@ -1,6 +1,6 @@
-# gcn
+# GCN
 
-GCN是2016年发表的模型，论文名称是《Semi-Supervised Classification with Graph Convolutional Networks》（图卷积网络的半监督分类）。
+GCN 是2016年发表的模型，论文名称是《[Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/abs/1609.02907)》（图卷积网络的半监督分类）。
 
 参考 [《深入浅出图神经网络：GNN原理解析》](https://github.com/FighterLYL/GraphNeuralNetwork) 中第5章代码。
 
@@ -19,7 +19,7 @@ matplotlib		3.9.0
 
 ### 运行
 
-```cmd
+```shell
 python train.py
 ```
 
@@ -35,9 +35,13 @@ loss和验证集acc曲线
 
 【实验数据集介绍】
 
-实验使用[Cora数据集](https://github.com/kimiyoung/planetoid)，Cora数据集包含2708个节点， 5429条边，总共7种类别。每个节点代表一篇科学出版物，边表示出版物存在引用关系。
+实验使用[Cora数据集](https://github.com/kimiyoung/planetoid)，Cora数据集包含`2708`个节点（训练样本）， `5429`条边，总共`7`种类别。每个节点代表一篇科学出版物，边表示出版物存在引用关系。数据划分如下：
 
-每个节点的特征向量是由一个1433维的词向量表示，向量值是0和1，1表示单词存在该出版物中，否则不存在。
+| dataset | train | val  | test | 无监督样本 |
+| ------- | ----- | ---- | ---- | ---------- |
+| Cora    | 140   | 500  | 1000 | 1068       |
+
+每个节点的特征向量是由一个`1433`维的词向量表示，向量值是0和1，1表示出版物存在该单词，否则不存在。
 
 data/cora文件夹中的数据集是经过处理好的，含义如下：
 
@@ -75,9 +79,9 @@ $$  H^{(l+1)} = \sigma(\hat{D}^{-1/2}\hat{A}\hat{D}^{-1/2}H^{(l)}W^{(l)})  $$
 
 -  $\hat{A}=A+I，I$ 是单位矩阵；
 - $\hat{D}$ 是 $\hat{A}$ 的度矩阵（degree matrix），公式为 $\hat{D_{ii}}=\sum_j{\hat{A}_{ii}}$；
-- H是隐藏层的特征，对于输入层,  $H^{(0)}=X$ ；  
-- σ是非线性激活函数，模型中使用ReLU激活函数；
-- W是训练权重矩阵。
+- H 是隐藏层的特征，对于输入层,  $H^{(0)}=X$ ；  
+- σ 是非线性激活函数，模型中使用ReLU激活函数；
+- W 是训练权重矩阵。
 
 在实际使用中，公式中的 $\hat{D}^{-1/2}\hat{A}\hat{D}^{-1/2}$ 是可以事先计算好，节省计算时间。
 
@@ -101,13 +105,15 @@ $$(N\*\bcancel{N})\*(\bcancel{N}\*\bcancel{N})\*(\bcancel{N}\*\bcancel{N})\*(\bc
 
 <img src="./README.assets/image-20240613091439713.png" alt="image-20240613091439713" style="zoom:67%;" />
 
-可以观察到，在Cora数据集中，使用X特征向量取得81.5%的准确率，使用随机初始化特征向量取得80.1%的准确率。
+可以观察到，在Cora数据集中，使用X特征向量取得`81.5%`的准确率，使用随机初始化特征向量取得80.1%的准确率。本项目代码在200个训练轮次（epoch）中最佳效果达到`81.0%`，与论文结果非常接近了。
 
-尽管GCN的效果很好，但存在一个**局限**就是**计算复杂度太高**，而且无论是测试集还是训练集，都要整张图一起训练学习。
+尽管GCN的效果相对传统方法提升很大，但存在一个**局限**就是**计算复杂度太高**，而且无论是测试集还是训练集，都要整张图一起训练学习。
 
 ## 参考
 
 论文：https://arxiv.org/abs/1609.02907
+
+论文作者实现的代码（TensorFlow）：https://github.com/tkipf/gcn
 
 [《深入浅出图神经网络：GNN原理解析》](https://github.com/FighterLYL/GraphNeuralNetwork)
 
@@ -118,3 +124,4 @@ $$(N\*\bcancel{N})\*(\bcancel{N}\*\bcancel{N})\*(\bcancel{N}\*\bcancel{N})\*(\bc
 [如何理解 Graph Convolutional Network（GCN）？ - superbrother的回答 - 知乎 ](https://www.zhihu.com/question/54504471/answer/332657604)
 
 [【数据集介绍】Cora数据集介绍-CSDN博客](https://blog.csdn.net/zfhsfdhdfajhsr/article/details/116137598)
+
